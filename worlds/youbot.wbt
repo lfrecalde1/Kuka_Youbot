@@ -1,0 +1,75 @@
+#VRML_SIM R2020b utf8
+WorldInfo {
+  info [
+    "Simulation of the KUKA youBot robot."
+    "This model includes an accurate and fast simulation of the Meccanum wheels."
+    "The robot can be equiped with various sensors (including the Microsoft Kinect) and configured with zero, one or two arms."
+  ]
+  title "KUKA youBot"
+  basicTimeStep 16
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation -0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation 0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.693548064055672 0.6697738062820265 0.2653189236807575 5.257359876359552
+  position -0.062107394963543026 1.5408915501632452 0.8984629290105863
+  follow "youBot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 100 100
+}
+Youbot {
+  hidden position_0_0 63.81509510757766
+  hidden position_0_1 -38.42372121389496
+  hidden position_0_2 -33.48780032704861
+  hidden position_0_3 58.156881020297966
+  hidden rotation_3 0 1 0 0.9832420357817969
+  hidden rotation_4 0 -1 0 0.7246093708174383
+  hidden rotation_5 0 1 0 4.211311516028909
+  hidden rotation_6 0 -1 0 4.674972051497899
+  translation 0.8948903912628262 0.10259164447078178 0.4743778904182355
+  rotation 0.982154569327616 -0.13292134962699417 -0.133057569353358 -1.5887831578006186
+  controller "PRACTICA_2"
+  controllerArgs [
+    "demo"
+  ]
+  bodySlot [
+    InertialUnit {
+    }
+    GPS {
+      accuracy 0.01
+    }
+  ]
+  numberOfArms 0
+}
+KukaBox {
+  translation -0.9428266249819115 0.012491722801184263 -0.4187381279677242
+  rotation 0.6831338068745476 0.5163952954934119 0.5163952949992475 -1.9429597390677529
+}
