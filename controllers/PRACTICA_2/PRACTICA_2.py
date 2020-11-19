@@ -47,9 +47,9 @@ d=0.2080                         # se saco de las diensiones reales
 r=0.05                          # radio de las ruedas
 
 #velocidades generales
-ul=1*np.ones((t.shape[0],t.shape[1]))
-um=0*np.ones((t.shape[0],t.shape[1]))
-w=0*np.ones((t.shape[0],t.shape[1]))
+ul=0.0*np.ones((t.shape[0],t.shape[1]))
+um=0.0*np.ones((t.shape[0],t.shape[1]))
+w=0.2*np.ones((t.shape[0],t.shape[1]))
 
 #velocidades de cada rueda
 w_1=0*np.ones((t.shape[0],t.shape[1]))
@@ -72,17 +72,17 @@ if robot.step(timestep) != -1:
     y[0,0]=y_real+a*np.sin(phi[0,0])+b*np.cos(phi[0,0])
     
 # Trayectoria Deseada
-xd=1*np.cos(0.2*t)
-yd=1*np.sin(0.2*t)
+xd=1*np.cos(0.5*t)
+yd=0.2*t
 phi_d=(0*np.pi)/180*np.ones((t.shape[0],t.shape[1]))
 
 #trayectoria deseada derivada
-xd_p=-1*0.2*np.sin(0.2*t)
-yd_p= 0.2*1*np.cos(0.2*t)
+xd_p=-1*0.5*np.sin(0.5*t)
+yd_p=0.2*np.ones((t.shape[0],t.shape[1]))
 
 #ganancias del controlador
 k1=1
-k2=0.2
+k2=0.5
 k3=1
 k4=1
 
@@ -115,10 +115,10 @@ for k in range(0,t.shape[1]):
         qd=np.array([[0],[0],[phi_d[0,k]]])
     
         #controlador basado en Lyapunov
-        ul[0,k],um[0,k],w[0,k]=controlador(h,hd,hdp,q,a,b,k1,k2)
+        #ul[0,k],um[0,k],w[0,k]=controlador(h,hd,hdp,q,a,b,k1,k2)
  
         #controlador basado en Lyapunov
-        #ul[0,k],um[0,k],w[0,k]=controlador_secundario(h,hd,hdp,q,qd,a,b,k1,k2,k3,k4)
+        ul[0,k],um[0,k],w[0,k]=controlador_secundario(h,hd,hdp,q,qd,a,b,k1,k2,k3,k4)
         # Vector de velocidades del sistema
         v=np.array([[ul[0,k]],[um[0,k]],[w[0,k]]])
 
